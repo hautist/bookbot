@@ -1,3 +1,4 @@
+import sys
 from stats import word_count, character_count_dict, sorted_dict_list
 
 
@@ -8,7 +9,10 @@ def get_book_text(filepath):
 
 
 def main():
-    book = "books/frankenstein.txt"
+    if (len(sys.argv) < 2) or (len(sys.argv) > 2):
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    book = sys.argv[1]
     frankenstein_contents = get_book_text(book)
     frankenstein_wc = word_count(frankenstein_contents)
     frankenstein_char_dict = character_count_dict(frankenstein_contents)
