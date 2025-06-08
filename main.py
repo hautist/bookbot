@@ -1,4 +1,4 @@
-from stats import word_count, character_count_dict
+from stats import word_count, character_count_dict, sorted_dict_list
 
 
 def get_book_text(filepath):
@@ -8,11 +8,21 @@ def get_book_text(filepath):
 
 
 def main():
-    frankenstein_contents = get_book_text("books/frankenstein.txt")
+    book = "books/frankenstein.txt"
+    frankenstein_contents = get_book_text(book)
     frankenstein_wc = word_count(frankenstein_contents)
     frankenstein_char_dict = character_count_dict(frankenstein_contents)
-    print(f"{frankenstein_wc} words found in the document")
-    print(frankenstein_char_dict)
+    sorted_frankenstein_char_dict = sorted_dict_list(frankenstein_char_dict)
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {book}...")
+    print("----------- Word Count ----------")
+    print(f"Found {frankenstein_wc} total words")
+    print("--------- Character Count -------")
+    for char_dict in sorted_frankenstein_char_dict:
+        if char_dict["char"] == "\n":
+            continue
+        print(f"{char_dict['char']}: {char_dict['num']}")
+    print("============= END ===============")
 
 
 main()
